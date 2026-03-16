@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Agenda de Contactos TAREA</title>
+</head>
+<body>
+
+<h1>Agenda de Contactos de Lesly</h1> <br>
+
+<input type="text" id="buscar" placeholder="Buscar contacto...">
+
+<h3>Agregar / Editar </h3>
+
+<input type="text" id="nombre" placeholder="Nombre"> <br> <br>
+<input type="text" id="direccion" placeholder="Dirección"> <br> <br>
+<input type="text" id="telefono" placeholder="Teléfono" maxlength="10"> <br> <br>
+<input type="email" id="correo" placeholder="Correo"> <br> <br>
+<input type="text" id="foto" placeholder="URL de Foto">
+
+<br> <br> <button onclick="guardarContacto()">Guardar</button>
+<button onclick="limpiarAgenda()">Limpiar Agenda</button> 
+
+<h3>Lista de Contactos</h3>
+
+<div id="listaContactos"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
