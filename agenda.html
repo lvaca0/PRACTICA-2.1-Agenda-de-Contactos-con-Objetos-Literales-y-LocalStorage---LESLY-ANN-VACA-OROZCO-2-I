@@ -2,24 +2,34 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Agenda de Contactos TAREA</title>
+<title>Agenda de Contactos</title>
 </head>
 <body>
 
-<h1>Agenda de Contactos de Lesly</h1> <br>
+<h1>Agenda de Contactos de Lesly</h1>
 
+/*buscador*/
 <input type="text" id="buscar" placeholder="Buscar contacto...">
 
-<h3>Agregar / Editar </h3>
+/*filtro por campo*/
+<select id="filtroCampo">
+<option value="todos">Todos</option>
+<option value="nombre">Nombre</option>
+<option value="direccion">Dirección</option>
+<option value="telefono">Teléfono</option>
+<option value="correo">Correo</option>
+</select>
 
-<input type="text" id="nombre" placeholder="Nombre"> <br> <br>
-<input type="text" id="direccion" placeholder="Dirección"> <br> <br>
-<input type="text" id="telefono" placeholder="Teléfono" maxlength="10"> <br> <br>
-<input type="email" id="correo" placeholder="Correo"> <br> <br>
-<input type="text" id="foto" placeholder="URL de Foto">
+<h3>Agregar / Editar</h3>
 
-<br> <br> <button onclick="guardarContacto()">Guardar</button>
-<button onclick="limpiarAgenda()">Limpiar Agenda</button> 
+<input type="text" id="nombre" placeholder="Nombre"><br><br>
+<input type="text" id="direccion" placeholder="Dirección"><br><br>
+<input type="text" id="telefono" placeholder="Teléfono" maxlength="10"><br><br>
+<input type="email" id="correo" placeholder="Correo"><br><br>
+<input type="text" id="foto" placeholder="URL de Foto"><br><br>
+
+<button onclick="guardarContacto()">Guardar</button>
+<button onclick="limpiarAgenda()">Limpiar Agenda</button>
 
 <h3>Lista de Contactos</h3>
 
