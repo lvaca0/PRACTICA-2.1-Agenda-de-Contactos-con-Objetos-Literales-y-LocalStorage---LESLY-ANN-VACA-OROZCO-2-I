@@ -106,7 +106,7 @@ document.getElementById("foto").value="";
 }
 
 
-// filtro avanzado (LO QUE TE PIDIÓ EL PROFE)
+// filtro (lo que pidio el profe a ultima hora)
 document.getElementById("buscar").addEventListener("input", filtrarContactos);
 document.getElementById("filtroCampo").addEventListener("change", filtrarContactos);
 
@@ -163,7 +163,7 @@ this.value = this.value.replace(/[^0-9]/g,'');
 });
 
 
-// limpiar toda la agenda (RETO)
+// limpiar toda la agenda
 function limpiarAgenda(){
 
 if(confirm("¿Seguro que deseas eliminar todos los contactos?")){
