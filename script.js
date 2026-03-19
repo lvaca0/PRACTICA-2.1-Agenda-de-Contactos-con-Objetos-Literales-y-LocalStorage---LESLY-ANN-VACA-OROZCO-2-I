@@ -1,9 +1,9 @@
-// para tener los contactos guardados
+// cargar contactos
 let listaContactos = JSON.parse(localStorage.getItem("agenda")) || [];
 
 let indiceEditar = -1;
 
-// guardar el contacto
+// guardar contacto
 function guardarContacto(){
 
 let nombre = document.getElementById("nombre").value;
@@ -28,7 +28,6 @@ listaContactos[indiceEditar] = contacto;
 indiceEditar = -1;
 }
 
-// guardar en localStorage
 localStorage.setItem("agenda", JSON.stringify(listaContactos));
 
 limpiarFormulario();
@@ -47,7 +46,7 @@ listaContactos.forEach((c,index)=>{
 contenedor.innerHTML += `
 <div class="contacto">
 
-<img src="${c.urlFoto}" width="80">
+<img src="${c.urlFoto || 'https://via.placeholder.com/80'}" width="80">
 
 <p><b>Nombre:</b> ${c.nombre}</p>
 <p><b>Dirección:</b> ${c.direccion}</p>
@@ -65,15 +64,13 @@ contenedor.innerHTML += `
 }
 
 
-// eliminar
+// eliminar contacto
 function eliminarContacto(index){
 
 if(confirm("¿Eliminar este contacto?")){
 
 listaContactos.splice(index,1);
-
 localStorage.setItem("agenda", JSON.stringify(listaContactos));
-
 mostrarContactos();
 
 }
@@ -81,7 +78,7 @@ mostrarContactos();
 }
 
 
-// editar
+// editar contacto
 function editarContacto(index){
 
 let c = listaContactos[index];
@@ -97,7 +94,7 @@ indiceEditar = index;
 }
 
 
-// limpiar la agenda
+// limpiar formulario
 function limpiarFormulario(){
 
 document.getElementById("nombre").value="";
@@ -109,27 +106,38 @@ document.getElementById("foto").value="";
 }
 
 
-// el buscador
-document.getElementById("buscar").addEventListener("input", function(){
+// filtro avanzado (LO QUE TE PIDIÓ EL PROFE)
+document.getElementById("buscar").addEventListener("input", filtrarContactos);
+document.getElementById("filtroCampo").addEventListener("change", filtrarContactos);
 
-let texto = this.value.toLowerCase();
+function filtrarContactos(){
+
+let texto = document.getElementById("buscar").value.toLowerCase();
+let campo = document.getElementById("filtroCampo").value;
 
 let contenedor = document.getElementById("listaContactos");
 contenedor.innerHTML = "";
 
 listaContactos.forEach((c,index)=>{
 
-if(
+let coincide = false;
+
+if(campo === "todos"){
+coincide =
 c.nombre.toLowerCase().includes(texto) ||
 c.direccion.toLowerCase().includes(texto) ||
 c.telefono.includes(texto) ||
-c.correo.toLowerCase().includes(texto)
-){
+c.correo.toLowerCase().includes(texto);
+}else{
+coincide = c[campo].toLowerCase().includes(texto);
+}
+
+if(coincide){
 
 contenedor.innerHTML += `
 <div class="contacto">
 
-<img src="${c.urlFoto}" width="80">
+<img src="${c.urlFoto || 'https://via.placeholder.com/80'}" width="80">
 
 <p><b>Nombre:</b> ${c.nombre}</p>
 <p><b>Dirección:</b> ${c.direccion}</p>
@@ -146,30 +154,28 @@ contenedor.innerHTML += `
 
 });
 
-});
+}
 
 
-// solo para que se puedan ponernúmeros en teléfono
+// solo números en teléfono
 document.getElementById("telefono").addEventListener("input", function(){
-
 this.value = this.value.replace(/[^0-9]/g,'');
-
 });
 
 
-// esto se muestra al iniciar
-mostrarContactos();
-
+// limpiar toda la agenda (RETO)
 function limpiarAgenda(){
 
 if(confirm("¿Seguro que deseas eliminar todos los contactos?")){
 
 localStorage.removeItem("agenda");
-
 listaContactos = [];
-
 mostrarContactos();
 
 }
 
 }
+
+
+// mostrar al iniciar
+mostrarContactos();
